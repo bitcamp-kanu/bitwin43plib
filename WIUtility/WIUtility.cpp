@@ -202,3 +202,63 @@ void WIUtility::TextColor(int color_number)
 {	
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),color_number);
 }
+
+string WIUtility::GetSocketIP(const SOCKADDR_IN&  SockAddress)
+{
+	char SocketIP[255]={0};
+	strcpy(SocketIP, inet_ntoa(SockAddress.sin_addr));
+	return string(SocketIP);
+}
+
+int WIUtility::GetSocketPORT(const SOCKADDR_IN&  SockAddress)
+{
+	return ntohs(SockAddress.sin_port);
+}
+
+string WIUtility::GetFormatString(char* format,...)
+{
+	char buff [255] = {0};
+	va_list Marker;
+	va_start(Marker, format);
+	vsprintf(buff,format,Marker);
+	va_end(Marker);
+	string str(buff);
+	return str;
+}
+
+string WIUtility::GetErrorMessage(int errorCode)
+{
+	LPVOID lpMsgBuf = NULL;
+	FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER|
+		FORMAT_MESSAGE_FROM_SYSTEM,
+		NULL,errorCode,
+		MAKELANGID(LANG_NEUTRAL,SUBLANG_DEFAULT),
+		(LPSTR)&lpMsgBuf,0,NULL);
+
+	string strMsg((LPSTR)lpMsgBuf);
+	LocalFree(lpMsgBuf);
+	return strMsg;
+}
+
+
+string WIUtility::GetLastErrorMessage()
+{
+	LPVOID lpMsgBuf = NULL;
+	FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER|
+		FORMAT_MESSAGE_FROM_SYSTEM,
+		NULL,WSAGetLastError(),
+		MAKELANGID(LANG_NEUTRAL,SUBLANG_DEFAULT),
+		(LPSTR)&lpMsgBuf,0,NULL);
+
+	string strMsg((LPSTR)lpMsgBuf);
+	LocalFree(lpMsgBuf);
+	return strMsg;
+}
+
+
+string WIUtility::GetCurrentDir()
+{
+	char buff[1024] = {0};
+	GetCurrentDirectory(1024,buff);
+	return string(buff);
+}

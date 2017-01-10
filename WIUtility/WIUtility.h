@@ -1,5 +1,11 @@
 #pragma once
 
+#pragma comment(lib,"Ws2_32.lib") //winsock 2.2 라이브러리
+#define WINVER 0x0501
+#define _WIN32_WINNT 0x0501
+
+#include <WinSock2.h> //Winsock 2 버전 Header
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <conio.h>
@@ -112,5 +118,18 @@ public:
 	*/
 	static void TextColor(int color_number = 7);
 
+	//SOCKADDR_IN 값을 127.0.0.1 형식의 IP 문자열 형태로 변환 한다. (bossfamily)
+	static string GetSocketIP(const SOCKADDR_IN&  SockAddress);
+	//SOCKADDR_IN 값을 Port 값 으로 변환 하낟.					(bossfamily)
+	static int GetSocketPORT(const SOCKADDR_IN&  SockAddress);
+
+	//2016.12.29 GetFormatString 비정적을 정적(static) 으로 수정  ChoRong33	
+	static string GetFormatString(char* format,...);
+	//에러 메세지를 반환 한다. (found75)
+	static string GetErrorMessage(int errorCode);
+	//마지막 발생한 ErrorCode  를 반환 한다. (found75)
+	static string GetLastErrorMessage();
+	//현재 포더명을 반환 한다.
+	static string GetCurrentDir();
 };
 
