@@ -48,7 +48,6 @@ void WIUtility::Tokenize(const string& str,vector<string>& tokens,const string& 
 	}
 }
 
-
 vector<string>  WIUtility::Tokenize(const string& str,const string& delimiters/* = " "*/)
 {
 	vector<string> tokens;
