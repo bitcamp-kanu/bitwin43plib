@@ -40,5 +40,17 @@ namespace CSharpProject
         {
             return (float)Math.Sqrt((double)(mx - catx) * (mx - catx) + (my - caty) * (my - caty));
         }
+        /// <summary>
+        /// 두 점 간에 거리를 구한다. (kimsoar)
+        /// </summary>
+        /// <param name="mx"></param>
+        /// <param name="my"></param>
+        /// <param name="catx"></param>
+        /// <param name="caty"></param>
+        /// <returns></returns>
+        static public float CalcDistanceestxxxxxxxxx(float mx, float my, float catx, float caty)
+        {
+            return (float)Math.Sqrt((double)(mx - catx) * (mx - catx) + (my - caty) * (my - caty));
+        }
     }
 }
